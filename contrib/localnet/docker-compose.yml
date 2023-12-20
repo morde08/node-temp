@@ -63,7 +63,7 @@ services:
       dockerfile: Dockerfile
     hostname: zetaclient0
     ports:
-      - "8666:8666"
+      - "8886:8886"
     networks:
       mynetwork:
         ipv4_address: 172.20.0.21

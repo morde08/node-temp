@@ -1,12 +1,48 @@
 version: '3'
+
+networks:
+  mynetwork:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
 services:
   grafana:
     image: grafana/grafana
+    container_name: grafana
+    hostname: grafana
+    volumes:
+      - ./grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./grafana/dashboards/default.yaml:/etc/grafana/provisioning/dashboards/default.yaml
+      - ./grafana/dashboards/cosmos_dashboard.json:/etc/grafana/provisioning/dashboards/cosmos_dashboard.json
     ports:
       - "3000:3000"
+    networks:
+      mynetwork:
+        ipv4_address: 172.20.0.30
+
   prometheus:
     image: prom/prometheus
+    container_name: prometheus
+    hostname: prometheus
     volumes:
-      - /Users/peterlee/go/src/github.com/zeta-chain/node/contrib/localnet/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
+    networks:
+      mynetwork:
+        ipv4_address: 172.20.0.31
+
+  ethbalance:
+    image: ethbalance
+    container_name: ethbalance
+    hostname: ethbalance
+    volumes:
+      - ./grafana/addresses.txt:/app/addresses.txt
+    ports:
+      - "9015:9015"
+    networks:
+      mynetwork:
+        ipv4_address: 172.20.0.32
+    environment:
+      - GETH=http://eth:8545

@@ -24,10 +24,16 @@ scrape_configs:
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
     static_configs:
-      - targets: ["zetacore0:26660"]
+      - targets: ["172.20.0.11:26660"]
 
   - job_name: "zetaclient"
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
     static_configs:
-      - targets: ["zetaclient0:8666"]
+      - targets: ["172.20.0.21:8886"]
+
+  - job_name: "ethbalance"
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+    static_configs:
+      - targets: ["172.20.0.32:9015"]
