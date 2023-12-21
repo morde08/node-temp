@@ -78,6 +78,7 @@ $ docker compose down --remove-orphans
 ```
 
 ### Run monitoring setup
+Before starting the monitoring setup, make sure you have added the addresses of interest to the address.txt file
 ```bash
 # in zeta-node/
 make start-monitoring
