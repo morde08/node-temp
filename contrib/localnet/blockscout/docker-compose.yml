@@ -89,9 +89,3 @@ services:
     extends:
       file: ./services/nginx.yml
       service: proxy
-
-networks:
-  mynetwork:
-    ipam:
-      config:
-        - subnet: 172.20.0.0/24
