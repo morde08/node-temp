@@ -1,11 +1,5 @@
 version: '3.9'
 
-networks:
-  mynetwork:
-    ipam:
-      config:
-        - subnet: 172.20.0.0/24
-
 services:
   redis_db:
     extends:
@@ -44,10 +38,10 @@ services:
     links:
       - db:database
     environment:
-        ETHEREUM_JSONRPC_HTTP_URL: http://172.20.0.11:8545/
-        ETHEREUM_JSONRPC_TRACE_URL: http://172.20.0.11:8545/
-        ETHEREUM_JSONRPC_WS_URL: ws://172.20.0.11:8545/
-        ETHEREUM_JSONRPC_VARIANT: 'ganache'
+        ETHEREUM_JSONRPC_HTTP_URL: http://host.docker.internal:9545/
+        ETHEREUM_JSONRPC_TRACE_URL: http://host.docker.internal:9545/
+        INDEXER_DISABLE_INTERNAL_TRANSACTIONS_FETCHER: 'true'
+        INDEXER_DISABLE_PENDING_TRANSACTIONS_FETCHER: 'true'
         CHAIN_ID: '7001'
 
 
@@ -95,3 +89,9 @@ services:
     extends:
       file: ./services/nginx.yml
       service: proxy
+
+networks:
+  mynetwork:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
