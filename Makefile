@@ -192,13 +192,21 @@ zetanode:
 	$(DOCKER) build -t orchestrator -f contrib/localnet/orchestrator/Dockerfile.fastbuild .
 .PHONY: zetanode
 
+start-blockscout:
+	@echo "Starting blockscout"
+	cd contrib/localnet/blockscout && $(DOCKER) compose -f docker-compose.yml up -d
+
+stop-blockscout:
+	@echo "Stopping blockscout"
+	cd contrib/localnet/blockscout && $(DOCKER) compose -f docker-compose.yml down --remove-orphans
+
 start-monitoring:
 	@echo "Starting monitoring services"
 	cd contrib/localnet/ && $(DOCKER) compose -f docker-compose-monitoring.yml up -d
 
 stop-monitoring:
 	@echo "Stopping monitoring services"
-	cd contrib/localnet/ && $(DOCKER) compose -f docker-compose-monitoring.yml down --remove-orphans
+	cd contrib/localnet/ && $(DOCKER) compose -f docker-compose-monitoring.yml down
 
 smoketest:
 	@echo "DEPRECATED: NO-OP: Building smoketest"

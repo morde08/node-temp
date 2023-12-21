@@ -13,7 +13,7 @@ services:
     container_name: rosetta
     hostname: rosetta
     ports:
-      - "8080:8080"
+      - "8080:8083"
     networks:
       mynetwork:
         ipv4_address: 172.20.0.200

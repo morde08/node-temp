@@ -77,6 +77,27 @@ which does the following docker compose command:
 $ docker compose down --remove-orphans
 ```
 
+### Run monitoring setup
+```bash
+# in zeta-node/
+make start-monitoring
+```
+which does the following docker compose command:
+```bash
+# in zeta-node/contrib/localnet/
+$ docker compose -f docker-compose-monitoring.yml up -d
+```
+To spin down the monitoring setup:
+```bash
+# in zeta-node/
+make stop-monitoring
+```
+which does the following docker compose command:
+```bash
+# in zeta-node/contrib/localnet/
+$ docker compose -f docker-compose-monitoring.yml down --remove-orphans
+```
+
 ## Useful data
 
 - On GOERLI (private ETH net), the deployer account is pre-funded with Ether. 
